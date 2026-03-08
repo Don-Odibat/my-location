@@ -14,7 +14,7 @@
             if (cleanPath === '/index') cleanPath = '/';
             window.history.replaceState(null, '', cleanPath);
         }
-        // 3. Enforce Trailing Slash consistency (Optional, but good for SEO: remove it)
+        // 3. Enforce Trailing Slash consistency
         if (location.pathname.endsWith('/') && location.pathname !== '/') {
             window.history.replaceState(null, '', location.pathname.slice(0, -1));
         }
@@ -165,6 +165,21 @@
         .faq-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 20px; border-radius: 12px; margin-bottom: 15px; } 
         .faq-q { font-weight: 700; color: var(--neon-blue); margin-bottom: 8px; font-size: 16px; } 
         .faq-a { color: #94a3b8; font-size: 14px; line-height: 1.6; }
+
+        /* --- NEW: DEADLY SCENARIO GRID CSS --- */
+        .scenario-showcase { margin-top: 60px; }
+        .scenario-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-top: 30px; }
+        .scenario-card { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; overflow: hidden; transition: all 0.3s ease; display: flex; flex-direction: column; }
+        .scenario-card:hover { border-color: var(--neon-blue); transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.5), 0 0 20px rgba(56, 189, 248, 0.1); }
+        .scenario-img { width: 100%; height: 200px; object-fit: cover; border-bottom: 2px solid var(--neon-blue); background: #1e293b; }
+        .scenario-body { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+        .scenario-title { font-size: 18px; font-weight: 900; color: white; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .scenario-desc { font-size: 14px; color: #cbd5e1; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
+        .scenario-steps { background: rgba(0,0,0,0.3); padding: 15px 20px; border-radius: 10px; border-left: 4px solid var(--accent); }
+        .scenario-steps h4 { font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; font-weight: 800; }
+        .scenario-steps ol { margin: 0; padding-left: 15px; color: #94a3b8; font-size: 13px; line-height: 1.6; }
+        .scenario-steps li { margin-bottom: 5px; }
+        .scenario-steps strong { color: white; }
     </style>
 </head>
 <body>
@@ -386,6 +401,142 @@
                 </div>
             </div>
 
+            <div class="content-section scenario-showcase">
+                <h2 style="font-size:28px; text-align:center; font-weight:900; margin-bottom:10px;">Life & Death Scenarios</h2>
+                <p style="text-align:center; font-size:15px; color:#94a3b8; max-width:600px; margin:0 auto;">TellMyLocation is engineered to save lives and solve massive logistical headaches when traditional maps fail. Here is exactly how to use it in the wild.</p>
+                
+                <div class="scenario-grid">
+                    
+                    <div class="scenario-card">
+                        <img src="scenario-rv-stuck.jpg" alt="RV Stuck Off-Grid" class="scenario-img">
+                        <div class="scenario-body">
+                            <h3 class="scenario-title">🚐 Off-Grid RV Recovery</h3>
+                            <p class="scenario-desc">Bogged down in deep sand miles from the main highway? Tow companies and heavy-duty recovery vehicles cannot find you with a standard street address.</p>
+                            <div class="scenario-steps">
+                                <h4>Protocol:</h4>
+                                <ol>
+                                    <li>Open <strong>TellMyLocation</strong> on your smartphone.</li>
+                                    <li>Tap the <strong>'Copy Lat/Long'</strong> button on the dashboard.</li>
+                                    <li>Paste the coordinates directly to the off-road recovery dispatcher.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-card">
+                        <img src="scenario-delivery-maze.jpg" alt="Lost Delivery Driver" class="scenario-img">
+                        <div class="scenario-body">
+                            <h3 class="scenario-title">🛵 The Apartment Labyrinth</h3>
+                            <p class="scenario-desc">Gate codes, hidden buildings, and broken map pins. Time is money for gig-economy drivers (UberEats, DoorDash). Don't drive in circles at 2 AM.</p>
+                            <div class="scenario-steps">
+                                <h4>Protocol:</h4>
+                                <ol>
+                                    <li>Have the customer tap <strong>'Share Location'</strong>.</li>
+                                    <li>Open their direct link in your browser.</li>
+                                    <li>Use <strong>'Driver Mode'</strong> to route your scooter directly to their physical doorway, bypassing faulty building addresses.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-card">
+                        <img src="scenario-highway-breakdown.jpg" alt="Highway Breakdown" class="scenario-img">
+                        <div class="scenario-body">
+                            <h3 class="scenario-title">⚠️ Midnight Highway Breakdown</h3>
+                            <p class="scenario-desc">Stranded on a dark interstate with a smoking engine and no mile markers in sight. Sitting in the car is incredibly dangerous.</p>
+                            <div class="scenario-steps">
+                                <h4>Protocol:</h4>
+                                <ol>
+                                    <li>Safely step <strong>behind the guardrail</strong>.</li>
+                                    <li>Wait 5 seconds for the GPS chip to secure a high-accuracy satellite lock.</li>
+                                    <li>Read the <strong>Decimal Degrees</strong> exactly as shown to Highway Patrol for a rapid ETA.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-card">
+                        <img src="scenario-tent-fog.jpg" alt="Deep Woods Camping Fog" class="scenario-img">
+                        <div class="scenario-body">
+                            <h3 class="scenario-title">🌲 Disoriented in the Backcountry</h3>
+                            <p class="scenario-desc">Thick fog rolls in, the trail disappears, and your basecamp is lost. The leading cause of search-and-rescue deployments is simple spatial disorientation.</p>
+                            <div class="scenario-steps">
+                                <h4>Protocol:</h4>
+                                <ol>
+                                    <li>Before you leave camp, open <strong>'Hiker Mode'</strong> and tap <strong>'Drop Pin'</strong>.</li>
+                                    <li>This saves the coordinates to your phone's offline cache.</li>
+                                    <li>If lost, use the built-in <strong>Compass</strong> to navigate back to your pin, even with zero bars of cell service.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-card">
+                        <img src="scenario-winter-ditch.jpg" alt="Car Stuck in Snow" class="scenario-img">
+                        <div class="scenario-body">
+                            <h3 class="scenario-title">❄️ Whiteout Winter Slide</h3>
+                            <p class="scenario-desc">You hit black ice and slid into a deep snowbank on a mountain pass. Visibility is zero, you are invisible to plows, and hypothermia is a ticking clock.</p>
+                            <div class="scenario-steps">
+                                <h4>Protocol:</h4>
+                                <ol>
+                                    <li>Do not leave the vehicle. Turn on your hazards.</li>
+                                    <li>Tap the massive red <strong>'SOS SHARE'</strong> button.</li>
+                                    <li>Send the automated SMS payload containing your exact rescue coordinates to 911 or emergency family contacts.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-card">
+                        <img src="scenario-lost-tourist.jpg" alt="Lost Tourist in City" class="scenario-img">
+                        <div class="scenario-body">
+                            <h3 class="scenario-title">🎒 Lost in Translation</h3>
+                            <p class="scenario-desc">Wandering a chaotic, bustling foreign city where the street signs are in a language you cannot read. Your travel group is separated.</p>
+                            <div class="scenario-steps">
+                                <h4>Protocol:</h4>
+                                <ol>
+                                    <li>Tap <strong>'Share Link'</strong> and send it to your group chat via WhatsApp.</li>
+                                    <li>Once they reply with their link, paste it into <strong>'Meet Friend'</strong> mode.</li>
+                                    <li>The tool will calculate the exact geographic midpoint for you to reunite safely.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-card">
+                        <img src="scenario-boat-storm.jpg" alt="Boat in Storm" class="scenario-img">
+                        <div class="scenario-body">
+                            <h3 class="scenario-title">🌊 Open Water Squall</h3>
+                            <p class="scenario-desc">A sudden, violent storm hits while you are recreational fishing miles off the coast. Radioing the Coast Guard requires exact maritime positioning.</p>
+                            <div class="scenario-steps">
+                                <h4>Protocol:</h4>
+                                <ol>
+                                    <li>Ensure your phone has a clear view of the sky (not under a heavy cabin roof).</li>
+                                    <li>Read the Latitude and Longitude to maritime dispatch over your <strong>VHF Radio (Channel 16)</strong>.</li>
+                                    <li>Activate the <strong>Strobe feature</strong> (found in guides) to flash visual SOS.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="scenario-card">
+                        <img src="scenario-rescue-truck.jpg" alt="Search and Rescue Truck" class="scenario-img">
+                        <div class="scenario-body">
+                            <h3 class="scenario-title">🚁 Search & Rescue Extraction</h3>
+                            <p class="scenario-desc">When 911 is dialed, dispatchers are often fighting against wildly inaccurate cell-tower triangulation data. They need hard numbers to send the trucks.</p>
+                            <div class="scenario-steps">
+                                <h4>Protocol:</h4>
+                                <ol>
+                                    <li>State: <strong>"I have exact GPS coordinates. Ready to copy?"</strong></li>
+                                    <li>Read the coordinates slowly, using phonetic alphabet markers (e.g., "North" = November).</li>
+                                    <li>Keep the dashboard open to monitor your <strong>Accuracy Radius</strong> in real-time.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
             <div class="ad-container">
                  <span class="ad-label">Sponsored</span>
                  <ins class="adsbygoogle"
@@ -424,21 +575,14 @@
             </div>
 
             <div class="content-section">
-                <h2>Real-World Use Cases</h2>
-                
+                <h2>Quick Examples</h2>
                 <div class="faq-item">
                     <div class="faq-q">🚗 Roadside Assistance</div>
                     <div class="faq-a">When your car breaks down on a rural highway, there are no street signs. Tow truck drivers and AAA require exact GPS coordinates to find you. Our tool provides the precise Decimal Degrees (e.g., 34.1234, -88.5678) standard used by dispatchers.</div>
                 </div>
-
                 <div class="faq-item">
                     <div class="faq-q">🚑 Emergency Services (911)</div>
                     <div class="faq-a">If you are hiking or in an unfamiliar city, you may not know the street name. Reading your coordinates from our dashboard to a 911 operator can help them triangulate your position immediately, bypassing the often-inaccurate cell tower triangulation.</div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-q">📦 Delivery & Logistics</div>
-                    <div class="faq-a">For gig workers (DoorDash, Uber Eats) or truck drivers, finding the exact entrance to a large apartment complex or industrial park is difficult with just a street address. Sharing coordinates ensures the driver arrives at the correct gate.</div>
                 </div>
             </div>
 
@@ -454,20 +598,13 @@
 
             <div class="content-section">
                 <h2>Frequently Asked Questions</h2>
-                
                 <div class="faq-item">
                     <div class="faq-q">Why is the location slightly off?</div>
                     <div class="faq-a">GPS accuracy depends on your environment. If you are indoors, concrete roofs block satellite signals, forcing your phone to rely on Wi-Fi triangulation (Accuracy: ~30 meters). Go outside for a clear view of the sky to improve accuracy to ~3 meters.</div>
                 </div>
-
                 <div class="faq-item">
                     <div class="faq-q">Does this work without cell service?</div>
                     <div class="faq-a">Yes. The core GPS technology in your phone works independently of your data plan. However, the background map tiles (images of streets) require data to load. The raw Latitude/Longitude numbers will always be accurate, even in "SOS Only" mode.</div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-q">Is my location saved?</div>
-                    <div class="faq-a">No. We have no user accounts and no database. Your location data exists in your browser's Random Access Memory (RAM) only for the duration of your visit. Once you close the tab, it is permanently deleted.</div>
                 </div>
             </div>
 
