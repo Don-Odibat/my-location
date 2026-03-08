@@ -1,21 +1,24 @@
 {
-  "name": "Tell My Location",
-  "short_name": "My Location",
-  "start_url": "/index.html",
+  "name": "Tell My Location | Global GPS",
+  "short_name": "TellMyLocation",
+  "description": "Instant, private, and accurate offline GPS coordinates and emergency survival tools.",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#0f172a",
   "theme_color": "#0f172a",
-  "description": "Instantly find your GPS coordinates, altitude, and local weather.",
+  "orientation": "portrait",
   "icons": [
     {
-      "src": "icon.png",
+      "src": "icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "icon.png",
+      "src": "icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
