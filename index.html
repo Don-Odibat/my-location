@@ -166,7 +166,7 @@
         .faq-q { font-weight: 700; color: var(--neon-blue); margin-bottom: 8px; font-size: 16px; } 
         .faq-a { color: #94a3b8; font-size: 14px; line-height: 1.6; }
 
-        /* --- NEW: DEADLY SCENARIO GRID CSS --- */
+        /* --- DEADLY SCENARIO GRID CSS --- */
         .scenario-showcase { margin-top: 60px; }
         .scenario-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-top: 30px; }
         .scenario-card { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; overflow: hidden; transition: all 0.3s ease; display: flex; flex-direction: column; }
@@ -181,7 +181,7 @@
         .scenario-steps li { margin-bottom: 5px; }
         .scenario-steps strong { color: white; }
 
-        /* --- NEW: PREMIUM SOCIAL SHARE HUB CSS --- */
+        /* --- PREMIUM SOCIAL SHARE HUB CSS --- */
         .social-hub {
             position: fixed;
             left: 20px;
@@ -243,13 +243,22 @@
             body { padding-bottom: 80px; } /* Prevent footer overlap */
         }
 
-        /* --- NEW: STREET VIEW PORTAL CSS --- */
+        /* --- STREET VIEW PORTAL CSS --- */
         .sv-card { background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(15, 23, 42, 0.8)); border: 1px solid var(--neon-blue); padding: 20px; border-radius: 16px; margin-top: 15px; text-align: center; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .sv-card h3 { color: white; font-size: 16px; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; z-index: 1; }
         .sv-desc { font-size: 12px; color: #94a3b8; margin-bottom: 15px; z-index: 1; max-width: 90%; }
         .btn-sv { background: var(--neon-blue); color: #0f172a; padding: 12px 25px; border-radius: 50px; font-weight: 800; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; z-index: 1; transition: 0.2s; text-decoration: none; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
         .btn-sv:hover { background: white; transform: scale(1.05); }
         .sv-bg-icon { position: absolute; right: -20px; bottom: -20px; opacity: 0.05; width: 120px; height: 120px; z-index: 0; pointer-events: none; }
+
+        /* --- NEW: TRUST BADGES CSS --- */
+        .trust-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin: 40px 0; }
+        .trust-item { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 25px 15px; border-radius: 16px; text-align: center; transition: 0.3s; }
+        .trust-item:hover { background: rgba(56, 189, 248, 0.05); border-color: rgba(56, 189, 248, 0.3); transform: translateY(-3px); }
+        .trust-icon { width: 40px; height: 40px; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; background: rgba(15, 23, 42, 0.8); border-radius: 50%; border: 1px solid var(--neon-blue); color: var(--neon-blue); box-shadow: 0 0 15px rgba(56,189,248,0.2); }
+        .trust-icon svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+        .trust-title { font-size: 13px; font-weight: 800; color: white; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .trust-desc { font-size: 11px; color: #94a3b8; line-height: 1.5; }
     </style>
 </head>
 <body>
@@ -423,6 +432,7 @@
                     DIAL DISPATCH NOW
                 </a>
             </div>
+
             <div class="nearby-header">
                 <svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                 <span data-i18n="nearby_label">📡 Nearest Emergency Services</span>
@@ -451,6 +461,7 @@
                     Enter Street View
                 </button>
             </div>
+
             <div class="btn-stack">
                 <button class="btn btn-sos" id="sos-btn">
                     <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
@@ -659,6 +670,7 @@
 
                 </div>
             </div>
+
             <div class="ad-container">
                  <span class="ad-label">Sponsored</span>
                  <ins class="adsbygoogle"
@@ -694,18 +706,6 @@
 
                 <h3>2. Privacy by Design (Client-Side)</h3>
                 <p>Most location apps send your data to a central server to be processed and stored. We utilize a <strong>Client-Side Architecture</strong>. This means the calculation of your position happens entirely within your phone's browser. Your coordinates are never stored in a database, ensuring your movement history remains private.</p>
-            </div>
-
-            <div class="content-section">
-                <h2>Quick Examples</h2>
-                <div class="faq-item">
-                    <div class="faq-q">🚗 Roadside Assistance</div>
-                    <div class="faq-a">When your car breaks down on a rural highway, there are no street signs. Tow truck drivers and AAA require exact GPS coordinates to find you. Our tool provides the precise Decimal Degrees (e.g., 34.1234, -88.5678) standard used by dispatchers.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-q">🚑 Emergency Services (911)</div>
-                    <div class="faq-a">If you are hiking or in an unfamiliar city, you may not know the street name. Reading your coordinates from our dashboard to a 911 operator can help them triangulate your position immediately, bypassing the often-inaccurate cell tower triangulation.</div>
-                </div>
             </div>
 
             <div class="card" style="margin-top:30px; padding:20px; border-color:var(--accent);">
@@ -750,6 +750,32 @@
                 </div>
             </div>
 
+            <div class="content-section" style="margin-bottom: 20px;">
+                <h2 style="font-size:24px; text-align:center; font-weight:900; margin-bottom:10px;">Verified & Secure</h2>
+                <p style="text-align:center; font-size:14px; color:#94a3b8; max-width:600px; margin:0 auto 30px;">Built to strict global engineering and privacy standards. Your safety is our infrastructure.</p>
+                <div class="trust-grid">
+                    <div class="trust-item">
+                        <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+                        <div class="trust-title">Zero-Knowledge</div>
+                        <div class="trust-desc">Client-side processing. Your location is never saved to a database.</div>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg></div>
+                        <div class="trust-title">Offline PWA</div>
+                        <div class="trust-desc">Cached Service Workers allow GPS extraction with zero cell service.</div>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div>
+                        <div class="trust-title">Multi-GNSS</div>
+                        <div class="trust-desc">Connects simultaneously to GPS, GLONASS, and Galileo arrays.</div>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
+                        <div class="trust-title">W3C Standard</div>
+                        <div class="trust-desc">Engineered on the strict HTML5 Geolocation API Level 2 standard.</div>
+                    </div>
+                </div>
+            </div>
             <p class="trust-badge">
                 <span data-i18n="trust_text">🔒 Privacy Guarantee: We do not save, need, or share your location. This website exists solely to help you or save you when needed. All data is processed securely on your device.</span>
             </p>
