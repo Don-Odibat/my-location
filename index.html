@@ -242,6 +242,14 @@
             .share-btn:hover { transform: scale(1.15) translateY(-5px); }
             body { padding-bottom: 80px; } /* Prevent footer overlap */
         }
+
+        /* --- NEW: STREET VIEW PORTAL CSS --- */
+        .sv-card { background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(15, 23, 42, 0.8)); border: 1px solid var(--neon-blue); padding: 20px; border-radius: 16px; margin-top: 15px; text-align: center; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .sv-card h3 { color: white; font-size: 16px; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; z-index: 1; }
+        .sv-desc { font-size: 12px; color: #94a3b8; margin-bottom: 15px; z-index: 1; max-width: 90%; }
+        .btn-sv { background: var(--neon-blue); color: #0f172a; padding: 12px 25px; border-radius: 50px; font-weight: 800; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; z-index: 1; transition: 0.2s; text-decoration: none; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-sv:hover { background: white; transform: scale(1.05); }
+        .sv-bg-icon { position: absolute; right: -20px; bottom: -20px; opacity: 0.05; width: 120px; height: 120px; z-index: 0; pointer-events: none; }
     </style>
 </head>
 <body>
@@ -432,6 +440,16 @@
                     <button class="mod-btn" style="flex:1; font-size:11px;" onclick="if(window.mapPreview && window.lastLat){ window.mapPreview.setView([window.lastLat, window.lastLng], 15); }">⬇ Recenter Map</button>
                     <button class="mod-btn" style="flex:1; font-size:11px;" onclick="if(window.lastLat){ window.open('https://www.google.com/maps?q=' + window.lastLat + ',' + window.lastLng, '_blank'); }">Open Full Map</button>
                 </div>
+            </div>
+
+            <div class="sv-card">
+                <svg class="sv-bg-icon" viewBox="0 0 24 24" fill="var(--neon-blue)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                <h3>🗺️ 360° Street View Portal</h3>
+                <div class="sv-desc">Instantly launch your exact coordinates into Google's native 360-degree environment.</div>
+                <button class="btn-sv" onclick="launchStreetView()">
+                    <svg style="width:16px;height:16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12a10 10 0 1 0 20 0 10 10 0 1 0-20 0"></path><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+                    Enter Street View
+                </button>
             </div>
             <div class="btn-stack">
                 <button class="btn btn-sos" id="sos-btn">
@@ -789,6 +807,16 @@
     function openDirectMap() {
         if (!currentPos) return alert("Waiting for location...");
         window.open(`https://www.google.com/maps?q=${currentPos.lat},${currentPos.lng}`, '_blank');
+    }
+
+    /* --- STREET VIEW LOGIC --- */
+    function launchStreetView() {
+        if (!window.currentPos || !window.currentPos.lat) {
+            return alert("Waiting for GPS lock. Please ensure location permissions are granted.");
+        }
+        // Uses Universal Google Maps Universal Cross-Platform Deep Link
+        const url = `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${window.currentPos.lat},${window.currentPos.lng}`;
+        window.open(url, '_blank', 'noopener,noreferrer');
     }
 
     // Generate QR Code
