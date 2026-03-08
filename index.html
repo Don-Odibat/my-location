@@ -397,6 +397,24 @@
                 </div>
             </div>
 
+            <div class="card" id="sos-directory-card" style="margin-bottom: 20px; padding: 20px; border: 1px solid var(--sos-red); background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(0,0,0,0));">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h3 style="color: white; font-size: 16px; margin-bottom: 5px; display: flex; align-items: center; gap: 8px;">
+                            <svg style="width:18px;height:18px;stroke:var(--sos-red);" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            Global SOS Directory
+                        </h3>
+                        <div id="sos-country-name" style="font-size: 12px; color: var(--text-soft); text-transform: uppercase; letter-spacing: 1px;">Detecting Jurisdiction...</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div id="sos-dial-number" style="font-size: 32px; font-weight: 900; color: var(--sos-red); line-height: 1;">--</div>
+                        <div style="font-size: 9px; color: #94a3b8; margin-top: 4px;">LOCAL EMERGENCY</div>
+                    </div>
+                </div>
+                <a id="sos-dial-btn" href="#" class="btn btn-sos" style="display: none; margin-top: 15px; padding: 12px; font-size: 14px;">
+                    DIAL DISPATCH NOW
+                </a>
+            </div>
             <div class="nearby-header">
                 <svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                 <span data-i18n="nearby_label">📡 Nearest Emergency Services</span>
@@ -1453,6 +1471,66 @@
             }
         }, 1000);
     })();
+</script>
+
+<script>
+    const globalSOS = {
+        "US": { n: "911", c: "United States" },
+        "CA": { n: "911", c: "Canada" },
+        "MX": { n: "911", c: "Mexico" },
+        "GB": { n: "999", c: "United Kingdom" },
+        "IE": { n: "112", c: "Ireland" },
+        "AU": { n: "000", c: "Australia" },
+        "NZ": { n: "111", c: "New Zealand" },
+        "ZA": { n: "10111", c: "South Africa" },
+        "IN": { n: "112", c: "India" },
+        "JP": { n: "110", c: "Japan (Police) / 119 (Fire)" },
+        "CN": { n: "110", c: "China (Police) / 120 (Amb)" },
+        "BR": { n: "190", c: "Brazil (Police) / 192 (Amb)" },
+        "AE": { n: "999", c: "UAE" },
+        "SA": { n: "999", c: "Saudi Arabia" },
+        "JO": { n: "911", c: "Jordan" },
+        "IL": { n: "100", c: "Israel" },
+        "EG": { n: "122", c: "Egypt" },
+        // EU Standard
+        "FR": { n: "112", c: "France" },
+        "DE": { n: "112", c: "Germany" },
+        "IT": { n: "112", c: "Italy" },
+        "ES": { n: "112", c: "Spain" },
+        "NL": { n: "112", c: "Netherlands" },
+        "SE": { n: "112", c: "Sweden" },
+        "NO": { n: "112", c: "Norway" },
+        "DK": { n: "112", c: "Denmark" },
+        "FI": { n: "112", c: "Finland" },
+        "CH": { n: "112", c: "Switzerland" },
+        "PT": { n: "112", c: "Portugal" },
+        "GR": { n: "112", c: "Greece" },
+        "PL": { n: "112", c: "Poland" },
+        "BE": { n: "112", c: "Belgium" },
+        "AT": { n: "112", c: "Austria" },
+        "CZ": { n: "112", c: "Czech Republic" }
+    };
+
+    function updateSOSDirectory(countryCode, countryName) {
+        const cCode = countryCode.toUpperCase();
+        // Fallback to 112 (GSM Standard) if not explicitly mapped
+        let sosData = globalSOS[cCode] || { n: "112", c: countryName || "Unknown Region" };
+        
+        document.getElementById('sos-country-name').innerText = `Jurisdiction: ${sosData.c}`;
+        document.getElementById('sos-dial-number').innerText = sosData.n;
+        
+        const primaryNumber = sosData.n.split(" ")[0]; 
+        const dialBtn = document.getElementById('sos-dial-btn');
+        dialBtn.style.display = 'inline-block';
+        dialBtn.href = `tel:${primaryNumber}`;
+    }
+
+    // Uses the highly reliable IP-API to fetch the user's country code on page load
+    fetch("https://ipapi.co/json/").then(r=>r.json()).then(d=>{
+        if(d.country) {
+            updateSOSDirectory(d.country, d.country_name);
+        }
+    }).catch(e => console.log("SOS Directory: Could not fetch local jurisdiction data."));
 </script>
 
 <script>
