@@ -251,7 +251,7 @@
         .btn-sv:hover { background: white; transform: scale(1.05); }
         .sv-bg-icon { position: absolute; right: -20px; bottom: -20px; opacity: 0.05; width: 120px; height: 120px; z-index: 0; pointer-events: none; }
 
-        /* --- NEW: TRUST BADGES CSS --- */
+        /* --- TRUST BADGES CSS --- */
         .trust-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin: 40px 0; }
         .trust-item { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 25px 15px; border-radius: 16px; text-align: center; transition: 0.3s; }
         .trust-item:hover { background: rgba(56, 189, 248, 0.05); border-color: rgba(56, 189, 248, 0.3); transform: translateY(-3px); }
@@ -684,16 +684,30 @@
                  </script>
             </div>
 
-            <div class="feature-grid">
-                <div class="feature-box">
-                    <span class="f-icon">🔒</span>
-                    <span class="f-title">Zero Logs</span>
-                    <span class="f-desc">Unlike standard map apps, we do not store your history. When you close this tab, your location data is deleted from memory.</span>
-                </div>
-                <div class="feature-box">
-                    <span class="f-icon">⚡</span>
-                    <span class="f-title">Offline Capable</span>
-                    <span class="f-desc">Our PWA technology means the core GPS logic works even without a data signal, critical for hikers and sailors.</span>
+            <div class="content-section" style="margin-bottom: 20px;">
+                <h2 style="font-size:24px; text-align:center; font-weight:900; margin-bottom:10px;">Verified & Secure</h2>
+                <p style="text-align:center; font-size:14px; color:#94a3b8; max-width:600px; margin:0 auto 30px;">Built to strict global engineering and privacy standards. Your safety is our infrastructure.</p>
+                <div class="trust-grid">
+                    <div class="trust-item">
+                        <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+                        <div class="trust-title">Zero-Knowledge</div>
+                        <div class="trust-desc">Client-side processing. Your location is never saved to a database.</div>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg></div>
+                        <div class="trust-title">Offline PWA</div>
+                        <div class="trust-desc">Cached Service Workers allow GPS extraction with zero cell service.</div>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div>
+                        <div class="trust-title">Multi-GNSS</div>
+                        <div class="trust-desc">Connects simultaneously to GPS, GLONASS, and Galileo arrays.</div>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
+                        <div class="trust-title">W3C Standard</div>
+                        <div class="trust-desc">Engineered on the strict HTML5 Geolocation API Level 2 standard.</div>
+                    </div>
                 </div>
             </div>
 
@@ -750,32 +764,6 @@
                 </div>
             </div>
 
-            <div class="content-section" style="margin-bottom: 20px;">
-                <h2 style="font-size:24px; text-align:center; font-weight:900; margin-bottom:10px;">Verified & Secure</h2>
-                <p style="text-align:center; font-size:14px; color:#94a3b8; max-width:600px; margin:0 auto 30px;">Built to strict global engineering and privacy standards. Your safety is our infrastructure.</p>
-                <div class="trust-grid">
-                    <div class="trust-item">
-                        <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
-                        <div class="trust-title">Zero-Knowledge</div>
-                        <div class="trust-desc">Client-side processing. Your location is never saved to a database.</div>
-                    </div>
-                    <div class="trust-item">
-                        <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg></div>
-                        <div class="trust-title">Offline PWA</div>
-                        <div class="trust-desc">Cached Service Workers allow GPS extraction with zero cell service.</div>
-                    </div>
-                    <div class="trust-item">
-                        <div class="trust-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div>
-                        <div class="trust-title">Multi-GNSS</div>
-                        <div class="trust-desc">Connects simultaneously to GPS, GLONASS, and Galileo arrays.</div>
-                    </div>
-                    <div class="trust-item">
-                        <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
-                        <div class="trust-title">W3C Standard</div>
-                        <div class="trust-desc">Engineered on the strict HTML5 Geolocation API Level 2 standard.</div>
-                    </div>
-                </div>
-            </div>
             <p class="trust-badge">
                 <span data-i18n="trust_text">🔒 Privacy Guarantee: We do not save, need, or share your location. This website exists solely to help you or save you when needed. All data is processed securely on your device.</span>
             </p>
@@ -837,11 +825,11 @@
 
     /* --- STREET VIEW LOGIC --- */
     function launchStreetView() {
-        if (!window.currentPos || !window.currentPos.lat) {
+        if (!currentPos || !currentPos.lat) {
             return alert("Waiting for GPS lock. Please ensure location permissions are granted.");
         }
-        // Uses Universal Google Maps Universal Cross-Platform Deep Link
-        const url = `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${window.currentPos.lat},${window.currentPos.lng}`;
+        // Official Google Maps Universal Deep Link for 360 Street View
+        const url = `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${currentPos.lat},${currentPos.lng}`;
         window.open(url, '_blank', 'noopener,noreferrer');
     }
 
@@ -1234,7 +1222,7 @@
 
     function openMapSearch(query) {
         if (!currentPos) return;
-        window.open(`https://www.google.com/maps/search/${query}/@${currentPos.lat},${currentPos.lng},15z`);
+        window.open(`https://www.google.com/maps/search/${query}/@${currentPos.lat},${currentPos.lng},15z`, '_blank');
     }
 
     function shareETA() {
@@ -1269,7 +1257,7 @@
         pins.forEach((p, i) => {
             const div = document.createElement('div');
             div.className = 'pin-item';
-            div.innerHTML = `<span>📍 Pin ${i+1} (${p.time})</span> <a href="https://maps.google.com/?q=${p.lat},${p.lng}" target="_blank" style="color:#38bdf8">Map</a>`;
+            div.innerHTML = `<span>📍 Pin ${i+1} (${p.time})</span> <a href="https://www.google.com/maps?q=${p.lat},${p.lng}" target="_blank" style="color:#38bdf8">Map</a>`;
             list.appendChild(div);
         });
     }
@@ -1312,7 +1300,7 @@
         const res = document.getElementById('friend-res');
         res.innerHTML = `
             <strong>Distance:</strong> ${dist.mi} mi / ${dist.km} km<br>
-            <strong>Midpoint:</strong> <a href="https://www.google.com/maps/search/coffee/@${midLat},${midLng},14z" target="_blank" style="color:#38bdf8; text-decoration:underline;">Find Meetup Spot</a>
+            <strong>Midpoint:</strong> <a href="https://www.google.com/maps?q=${midLat},${midLng}" target="_blank" style="color:#38bdf8; text-decoration:underline;">Find Meetup Spot</a>
         `;
     }
 
@@ -1348,9 +1336,9 @@
         let title = 'Tell My Location | Global GPS';
 
         // Dynamic coordinate broadcast if GPS is locked
-        if (window.currentPos) {
-            url = `https://tellmylocation.com/?lat=${window.currentPos.lat}&lng=${window.currentPos.lng}`;
-            text = `📍 I am currently at these exact coordinates: ${window.currentPos.lat.toFixed(5)}, ${window.currentPos.lng.toFixed(5)}. Track my location here:`;
+        if (currentPos && currentPos.lat) {
+            url = `https://tellmylocation.com/?lat=${currentPos.lat}&lng=${currentPos.lng}`;
+            text = `📍 I am currently at these exact coordinates: ${currentPos.lat.toFixed(5)}, ${currentPos.lng.toFixed(5)}. Track my location here:`;
         }
 
         let shareLink = '';
