@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script>
-        // 1. Enforce HTTPS
-        if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
-            location.replace(`https:${location.href.substring(location.protocol.length)}`);
-        }
-        // 2. Execute Redirect Immediately (using replace so it doesn't break the browser back button)
-        window.location.replace("privacy.html");
-    </script>
-
     <meta charset="UTF-8" />
     <title>Redirecting to Privacy Policy | Tell My Location</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
