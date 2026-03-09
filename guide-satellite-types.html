@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script>
-        if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
-            location.replace(`https:${location.href.substring(location.protocol.length)}`);
-        }
-        if (window.location.pathname.endsWith('.html')) {
-            var cleanPath = window.location.pathname.replace('.html', '');
-            window.history.replaceState(null, '', cleanPath);
-        }
-    </script>
     <meta charset="UTF-8" />
     <title>GPS vs GLONASS vs Galileo | Tell My Location</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
