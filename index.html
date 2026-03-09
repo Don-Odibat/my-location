@@ -42,8 +42,12 @@
     <meta name="theme-color" content="#0f172a">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="stylesheet" href="styles.css">
+
+    <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script defer src="app.js"></script>
     
     <script type="application/ld+json">
     {
@@ -75,171 +79,9 @@
         .icon-btn { background: none; border: none; cursor: pointer; color: var(--neon-blue); padding: 5px; display: flex; align-items: center; justify-content: center; transition: transform 0.2s; } .icon-btn:hover { transform: scale(1.1); } .copy-abs { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); }
         #map { width: 100%; height: 320px; border-radius: 18px; border: 1px solid var(--border); margin-bottom: 20px; z-index: 1; }
         .data-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 24px; } .data-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 16px; border-radius: 16px; text-align: left; } .label { font-size: 10px; color: var(--text-soft); text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.5px; } .value { font-size: 16px; font-weight: 700; color: #fff; } .sub-value { font-size: 11px; color: var(--neon-blue); margin-top: 4px; }
-        .nearby-header { font-size: 12px; text-transform: uppercase; color: var(--text-soft); margin-bottom: 10px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px; } .nearby-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; } @media(max-width: 600px) { .nearby-list { grid-template-columns: 1fr; } } .nearby-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 12px; border-radius: 12px; } .nearby-type { font-size: 9px; color: var(--accent); font-weight: 800; text-transform: uppercase; margin-bottom: 4px; } .nearby-name { font-size: 13px; font-weight: 600; color: #f1f5f9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } .nearby-dist { font-size: 11px; color: var(--neon-blue); }
-        .btn-stack { display: flex; flex-direction: column; gap: 12px; margin-top: 30px; } .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; } .btn { border: none; border-radius: 14px; padding: 16px; font-weight: 700; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 8px; transition: transform 0.1s; } .btn-sos { background: var(--sos-red); color: white; width: 100%; font-size: 16px; box-shadow: 0 0 20px rgba(239, 68, 68, 0.2); } .btn-primary { background: linear-gradient(135deg, #ff0055, #ff4d7d); color: white; } .btn-ghost { background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border); } .btn:active { transform: scale(0.98); } .icon { width: 18px; height: 18px; stroke-width: 2.5; }
-        .trust-badge { font-size: 12px; color: #94a3b8; text-align: center; margin-top: 25px; line-height: 1.6; background: rgba(15, 23, 42, 0.5); padding: 15px; border-radius: 12px; border: 1px dashed var(--border); }
-        footer { margin-top: 40px; text-align: center; font-size: 12px; color: var(--text-soft); padding-bottom: 30px; border-top: 1px solid var(--border); width: 100%; padding-top: 20px;} footer a { color: var(--text-soft); text-decoration: none; margin: 0 8px; transition: color 0.2s; } footer a:hover { color: white; }
-        #cookie-banner { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(15, 23, 42, 0.98); border-top: 1px solid var(--border); box-shadow: 0 -10px 40px rgba(0,0,0,0.8); z-index: 10000; padding: 20px; text-align: center; backdrop-filter: blur(10px); } .cookie-content { max-width: 600px; margin: 0 auto; } #cookie-text { margin-bottom: 15px; font-size: 13px; color: #cbd5e1; line-height: 1.5; } .cookie-buttons { display: flex; gap: 10px; justify-content: center; } .cookie-btn { border: none; padding: 10px 24px; border-radius: 50px; font-weight: 700; cursor: pointer; font-size: 13px; transition: 0.2s; } .btn-accept { background: var(--neon-blue); color: #0f172a; } .btn-accept:hover { background: white; } .btn-reject { background: transparent; border: 1px solid var(--text-soft); color: var(--text-soft); } .btn-reject:hover { border-color: white; color: white; }
-        .premium-upgrade-container { animation: fadeIn 1.2s ease-out; } @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .qr-section { text-align: center; margin-bottom: 25px; background: rgba(255,255,255,0.02); padding: 20px; border-radius: 20px; border: 1px solid var(--border); } .qr-label { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--neon-blue); margin-bottom: 10px; font-weight: 800; } #qrcode { display: inline-block; padding: 10px; background: white; border-radius: 12px; box-shadow: 0 0 20px rgba(56, 189, 248, 0.3); }
-        .premium-dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin: 20px 0; } .p-card { background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01)); border: 1px solid var(--border); padding: 20px; border-radius: 20px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: default; } .p-card:hover { border-color: var(--neon-blue); transform: scale(1.05); box-shadow: 0 10px 30px rgba(56,189,248,0.1); } .p-icon { font-size: 20px; margin-bottom: 10px; display: block; opacity: 0.8; } .p-label { font-size: 10px; text-transform: uppercase; color: var(--text-soft); } .p-value { font-size: 18px; font-weight: 800; color: white; display: block; margin-top: 5px; }
         .compass-wrap { position: relative; width: 220px; height: 220px; margin: 30px auto; background: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, transparent 70%); border-radius: 50%; padding: 10px; } #compass-svg { width: 100%; height: 100%; transition: transform 0.1s linear; filter: drop-shadow(0 0 10px var(--neon-blue)); } .compass-ring { fill: none; stroke: var(--border); stroke-width: 2; } .compass-glow { fill: none; stroke: var(--neon-blue); stroke-width: 1; opacity: 0.5; }
-        .use-case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 40px; } .use-case-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 20px; border-radius: 18px; text-align: center; transition: 0.3s; cursor: pointer; } .use-case-card:hover { background: rgba(255,255,255,0.05); border-color: var(--accent); transform: translateY(-2px); } .use-case-card h3 { font-size: 13px; text-transform: uppercase; margin-top: 10px; color: var(--text-main); }
-        .why-section { padding: 30px; background: linear-gradient(to right, rgba(56,189,248,0.05), transparent); border-left: 3px solid var(--neon-blue); border-radius: 12px; margin: 40px 0; } .why-section h2 { font-size: 18px; color: var(--neon-blue); margin-bottom: 10px; } .why-section p { font-size: 14px; color: var(--text-soft); line-height: 1.6; }
         .nav-menu { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; background: rgba(15, 23, 42, 0.6); padding: 10px 20px; border-radius: 50px; border: 1px solid var(--border); backdrop-filter: blur(5px); } .nav-menu a { color: var(--text-soft); text-decoration: none; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; } .nav-menu a:hover, .nav-menu a.active { color: var(--neon-blue); }
-        .hidden-page { display: none; margin-top: 20px; animation: fadeIn 0.5s ease; }
-        .new-module-container { display: none; margin-top: 20px; padding: 20px; border-radius: 16px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); text-align: left; } .new-module-container.active-mod { display: block; animation: slideDown 0.3s ease-out; } @keyframes slideDown { from {opacity:0; transform:translateY(-10px);} to {opacity:1; transform:translateY(0);} }
-        .mod-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 10px; } .mod-title { font-size: 16px; font-weight: 700; color: var(--neon-blue); text-transform: uppercase; letter-spacing: 1px; } .mod-close { cursor: pointer; color: var(--text-soft); font-size: 18px; background: none; border: none; }
-        .mod-grid-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; } .mod-btn { padding: 12px; border-radius: 8px; border: 1px solid var(--border); background: rgba(255,255,255,0.05); color: white; cursor: pointer; font-size: 13px; transition: 0.2s; } .mod-btn:hover { background: rgba(255,255,255,0.1); border-color: var(--neon-blue); } .mod-btn-primary { background: var(--neon-blue); color: #0f172a; border: none; font-weight: 700; } .mod-btn-danger { background: var(--sos-red); color: white; border: none; font-weight: 700; }
-        .mod-input { width: 100%; padding: 12px; background: rgba(0,0,0,0.2); border: 1px solid var(--border); color: white; border-radius: 8px; margin-bottom: 10px; outline: none; } .mod-input:focus { border-color: var(--neon-blue); }
-        .sos-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(30, 0, 0, 0.95); z-index: 9999; display: none; flex-direction: column; align-items: center; justify-content: center; } .sos-msg { font-size: 24px; font-weight: 900; color: white; margin-bottom: 30px; text-align: center; padding: 20px; }
-        .driver-hud { display: flex; justify-content: space-around; margin: 15px 0; background: rgba(0,0,0,0.4); padding: 15px; border-radius: 12px; } .hud-item { text-align: center; } .hud-val { font-size: 24px; font-weight: 800; color: white; display: block; } .hud-lbl { font-size: 10px; text-transform: uppercase; color: var(--text-soft); }
-        .pin-list { margin-top: 10px; max-height: 150px; overflow-y: auto; } .pin-item { padding: 8px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 12px; } .offline-badge { display: inline-block; padding: 4px 8px; background: #64748b; color: white; font-size: 10px; border-radius: 4px; margin-left: 10px; vertical-align: middle; display: none; }
-        
-        /* SAFE AD CONTAINER (Mobile Ad Density Fix) */
-        .ad-container { 
-            margin: 40px 0; /* Ensures distance from click targets */
-            padding: 15px 0; 
-            background: rgba(0, 0, 0, 0.2); 
-            border-radius: 16px; 
-            border: 1px dashed rgba(255, 255, 255, 0.1); 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            flex-direction: column; 
-            overflow: hidden;
-            width: 100%;
-        }
-        .ad-label {
-            font-size: 9px;
-            color: #64748b;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-        /* Mobile Specific Ad Rules */
-        @media(max-width: 600px) {
-            .ad-top-slot {
-                max-height: 100px; /* Forces banner ad above the fold on mobile */
-            }
-        }
-
-        /* FEATURE GRID CSS */
-        .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 40px 0; }
-        .feature-box { background: rgba(255,255,255,0.03); padding: 20px; border-radius: 16px; border: 1px solid var(--border); text-align: left; }
-        .f-icon { font-size: 24px; margin-bottom: 10px; display: block; }
-        .f-title { font-weight: 700; color: white; margin-bottom: 5px; display: block; }
-        .f-desc { font-size: 13px; color: var(--text-soft); line-height: 1.5; }
-        @media(max-width: 600px) { .feature-grid { grid-template-columns: 1fr; } }
-        
-        .specs-table { width: 100%; border-collapse: collapse; margin-top: 30px; font-size: 13px; }
-        .specs-table td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); color: #cbd5e1; }
-        .specs-table tr:last-child td { border-bottom: none; }
-        .spec-label { font-weight: 700; color: var(--accent); width: 40%; }
-
-        /* EXPANDED CONTENT STYLES */
-        .content-section { margin: 40px 0; border-top: 1px solid var(--border); padding-top: 40px; } 
-        .content-section h2 { font-size: 24px; color: #ffffff; margin-bottom: 20px; } 
-        .content-section h3 { font-size: 18px; color: var(--accent); margin-top: 25px; margin-bottom: 10px; } 
-        .content-section p { color: #cbd5e1; line-height: 1.7; margin-bottom: 15px; font-size: 15px; } 
-        .faq-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 20px; border-radius: 12px; margin-bottom: 15px; } 
-        .faq-q { font-weight: 700; color: var(--neon-blue); margin-bottom: 8px; font-size: 16px; } 
-        .faq-a { color: #94a3b8; font-size: 14px; line-height: 1.6; }
-
-        /* --- DEADLY SCENARIO GRID CSS --- */
-        .scenario-showcase { margin-top: 60px; }
-        .scenario-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-top: 30px; }
-        .scenario-card { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; overflow: hidden; transition: all 0.3s ease; display: flex; flex-direction: column; }
-        .scenario-card:hover { border-color: var(--neon-blue); transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.5), 0 0 20px rgba(56, 189, 248, 0.1); }
-        .scenario-img { width: 100%; height: 200px; object-fit: cover; border-bottom: 2px solid var(--neon-blue); background: #1e293b; }
-        .scenario-body { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
-        .scenario-title { font-size: 18px; font-weight: 900; color: white; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
-        .scenario-desc { font-size: 14px; color: #cbd5e1; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
-        .scenario-steps { background: rgba(0,0,0,0.3); padding: 15px 20px; border-radius: 10px; border-left: 4px solid var(--accent); }
-        .scenario-steps h4 { font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; font-weight: 800; }
-        .scenario-steps ol { margin: 0; padding-left: 15px; color: #94a3b8; font-size: 13px; line-height: 1.6; }
-        .scenario-steps li { margin-bottom: 5px; }
-        .scenario-steps strong { color: white; }
-
-        /* --- PREMIUM SOCIAL SHARE HUB CSS --- */
-        .social-hub {
-            position: fixed;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            z-index: 9999;
-            background: rgba(15, 23, 42, 0.85);
-            padding: 15px 12px;
-            border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-            transition: all 0.3s ease;
-        }
-        .share-btn {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-decoration: none;
-            border: none;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-        .share-btn svg { width: 22px; height: 22px; fill: white; }
-        .share-btn:hover { transform: scale(1.15) translateX(5px); }
-        
-        /* Platform Brand Colors */
-        .btn-x { background: #000000; border: 1px solid #333; }
-        .btn-fb { background: #1877F2; }
-        .btn-reddit { background: #FF4500; }
-        .btn-ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
-        .btn-wa { background: #25D366; }
-        .btn-sms { background: #38bdf8; }
-        .btn-email { background: #ea4335; }
-        
-        /* Mobile Share Hub Adjustment */
-        @media(max-width: 900px) {
-            .social-hub {
-                left: 50%;
-                top: auto;
-                bottom: 20px;
-                transform: translateX(-50%);
-                flex-direction: row;
-                padding: 10px 15px;
-                width: max-content;
-                max-width: 95vw;
-                overflow-x: auto;
-            }
-            .share-btn { width: 38px; height: 38px; flex-shrink: 0; }
-            .share-btn svg { width: 18px; height: 18px; }
-            .share-btn:hover { transform: scale(1.15) translateY(-5px); }
-            body { padding-bottom: 80px; } /* Prevent footer overlap */
-        }
-
-        /* --- STREET VIEW PORTAL CSS --- */
-        .sv-card { background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(15, 23, 42, 0.8)); border: 1px solid var(--neon-blue); padding: 20px; border-radius: 16px; margin-top: 15px; text-align: center; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .sv-card h3 { color: white; font-size: 16px; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; z-index: 1; }
-        .sv-desc { font-size: 12px; color: #94a3b8; margin-bottom: 15px; z-index: 1; max-width: 90%; }
-        .btn-sv { background: var(--neon-blue); color: #0f172a; padding: 12px 25px; border-radius: 50px; font-weight: 800; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; z-index: 1; transition: 0.2s; text-decoration: none; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
-        .btn-sv:hover { background: white; transform: scale(1.05); }
-        .sv-bg-icon { position: absolute; right: -20px; bottom: -20px; opacity: 0.05; width: 120px; height: 120px; z-index: 0; pointer-events: none; }
-
-        /* --- TRUST BADGES CSS --- */
-        .trust-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin: 40px 0; }
-        .trust-item { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 25px 15px; border-radius: 16px; text-align: center; transition: 0.3s; }
-        .trust-item:hover { background: rgba(56, 189, 248, 0.05); border-color: rgba(56, 189, 248, 0.3); transform: translateY(-3px); }
-        .trust-icon { width: 40px; height: 40px; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; background: rgba(15, 23, 42, 0.8); border-radius: 50%; border: 1px solid var(--neon-blue); color: var(--neon-blue); box-shadow: 0 0 15px rgba(56,189,248,0.2); }
-        .trust-icon svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-        .trust-title { font-size: 13px; font-weight: 800; color: white; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-        .trust-desc { font-size: 11px; color: #94a3b8; line-height: 1.5; }
+        .offline-badge { display: inline-block; padding: 4px 8px; background: #64748b; color: white; font-size: 10px; border-radius: 4px; margin-left: 10px; vertical-align: middle; display: none; }
     </style>
 </head>
 <body>
@@ -409,9 +251,7 @@
                         <div style="font-size: 9px; color: #94a3b8; margin-top: 4px;">LOCAL EMERGENCY</div>
                     </div>
                 </div>
-                <a id="sos-dial-btn" href="#" class="btn btn-sos" style="display: none; margin-top: 15px; padding: 12px; font-size: 14px;">
-                    DIAL DISPATCH NOW
-                </a>
+                <a id="sos-dial-btn" href="#" class="btn btn-sos" style="display: none; margin-top: 15px; padding: 12px; font-size: 14px;">DIAL DISPATCH NOW</a>
             </div>
 
             <div class="nearby-header">
@@ -429,7 +269,7 @@
                 <div id="mini-map" style="height:150px; border-radius:12px; margin-bottom:10px; z-index:0;"></div>
                 <div style="display:flex; gap:10px;">
                     <button class="mod-btn" style="flex:1; font-size:11px;" onclick="if(window.mapPreview && window.lastLat){ window.mapPreview.setView([window.lastLat, window.lastLng], 15); }">⬇ Recenter Map</button>
-                    <button class="mod-btn" style="flex:1; font-size:11px;" onclick="if(window.lastLat){ window.open('https://www.google.com/maps?q=' + window.lastLat + ',' + window.lastLng, '_blank'); }">Open Full Map</button>
+                    <button class="mod-btn" style="flex:1; font-size:11px;" onclick="if(window.lastLat){ window.open(`https://www.google.com/maps?q=$${window.lastLat},${window.lastLng}`, '_blank'); }">Open Full Map</button>
                 </div>
             </div>
 
@@ -520,7 +360,6 @@
                 <p style="text-align:center; font-size:15px; color:#94a3b8; max-width:600px; margin:0 auto;">TellMyLocation is engineered to save lives and solve massive logistical headaches when traditional maps fail. Here is exactly how to use it in the wild.</p>
                 
                 <div class="scenario-grid">
-                    
                     <div class="scenario-card">
                         <img src="scenario-rv-stuck.jpg" alt="RV Stuck Off-Grid" class="scenario-img">
                         <div class="scenario-body">
@@ -528,31 +367,21 @@
                             <p class="scenario-desc">Bogged down in deep sand miles from the main highway? Tow companies and heavy-duty recovery vehicles cannot find you with a standard street address.</p>
                             <div class="scenario-steps">
                                 <h4>Protocol:</h4>
-                                <ol>
-                                    <li>Open <strong>TellMyLocation</strong> on your smartphone.</li>
-                                    <li>Tap the <strong>'Copy Lat/Long'</strong> button on the dashboard.</li>
-                                    <li>Paste the coordinates directly to the off-road recovery dispatcher.</li>
-                                </ol>
+                                <ol><li>Open <strong>TellMyLocation</strong>.</li><li>Tap <strong>'Copy Lat/Long'</strong>.</li><li>Paste the coordinates directly to the off-road recovery dispatcher.</li></ol>
                             </div>
                         </div>
                     </div>
-
                     <div class="scenario-card">
                         <img src="scenario-delivery-maze.jpg" alt="Lost Delivery Driver" class="scenario-img">
                         <div class="scenario-body">
                             <h3 class="scenario-title">🛵 The Apartment Labyrinth</h3>
-                            <p class="scenario-desc">Gate codes, hidden buildings, and broken map pins. Time is money for gig-economy drivers (UberEats, DoorDash). Don't drive in circles at 2 AM.</p>
+                            <p class="scenario-desc">Gate codes, hidden buildings, and broken map pins. Time is money for gig-economy drivers. Don't drive in circles at 2 AM.</p>
                             <div class="scenario-steps">
                                 <h4>Protocol:</h4>
-                                <ol>
-                                    <li>Have the customer tap <strong>'Share Location'</strong>.</li>
-                                    <li>Open their direct link in your browser.</li>
-                                    <li>Use <strong>'Driver Mode'</strong> to route your scooter directly to their physical doorway, bypassing faulty building addresses.</li>
-                                </ol>
+                                <ol><li>Have the customer tap <strong>'Share Location'</strong>.</li><li>Open their direct link in your browser.</li><li>Use <strong>'Driver Mode'</strong> to route to their physical doorway.</li></ol>
                             </div>
                         </div>
                     </div>
-
                     <div class="scenario-card">
                         <img src="scenario-highway-breakdown.jpg" alt="Highway Breakdown" class="scenario-img">
                         <div class="scenario-body">
@@ -560,15 +389,10 @@
                             <p class="scenario-desc">Stranded on a dark interstate with a smoking engine and no mile markers in sight. Sitting in the car is incredibly dangerous.</p>
                             <div class="scenario-steps">
                                 <h4>Protocol:</h4>
-                                <ol>
-                                    <li>Safely step <strong>behind the guardrail</strong>.</li>
-                                    <li>Wait 5 seconds for the GPS chip to secure a high-accuracy satellite lock.</li>
-                                    <li>Read the <strong>Decimal Degrees</strong> exactly as shown to Highway Patrol for a rapid ETA.</li>
-                                </ol>
+                                <ol><li>Safely step <strong>behind the guardrail</strong>.</li><li>Wait 5 seconds for the GPS lock.</li><li>Read the <strong>Decimal Degrees</strong> to Highway Patrol.</li></ol>
                             </div>
                         </div>
                     </div>
-
                     <div class="scenario-card">
                         <img src="scenario-tent-fog.jpg" alt="Deep Woods Camping Fog" class="scenario-img">
                         <div class="scenario-body">
@@ -576,15 +400,10 @@
                             <p class="scenario-desc">Thick fog rolls in, the trail disappears, and your basecamp is lost. The leading cause of search-and-rescue deployments is simple spatial disorientation.</p>
                             <div class="scenario-steps">
                                 <h4>Protocol:</h4>
-                                <ol>
-                                    <li>Before you leave camp, open <strong>'Hiker Mode'</strong> and tap <strong>'Drop Pin'</strong>.</li>
-                                    <li>This saves the coordinates to your phone's offline cache.</li>
-                                    <li>If lost, use the built-in <strong>Compass</strong> to navigate back to your pin, even with zero bars of cell service.</li>
-                                </ol>
+                                <ol><li>Before you leave camp, open <strong>'Hiker Mode'</strong> and tap <strong>'Drop Pin'</strong>.</li><li>If lost, use the built-in <strong>Compass</strong> to navigate back to your pin offline.</li></ol>
                             </div>
                         </div>
                     </div>
-
                     <div class="scenario-card">
                         <img src="scenario-winter-ditch.jpg" alt="Car Stuck in Snow" class="scenario-img">
                         <div class="scenario-body">
@@ -592,15 +411,10 @@
                             <p class="scenario-desc">You hit black ice and slid into a deep snowbank on a mountain pass. Visibility is zero, you are invisible to plows, and hypothermia is a ticking clock.</p>
                             <div class="scenario-steps">
                                 <h4>Protocol:</h4>
-                                <ol>
-                                    <li>Do not leave the vehicle. Turn on your hazards.</li>
-                                    <li>Tap the massive red <strong>'SOS SHARE'</strong> button.</li>
-                                    <li>Send the automated SMS payload containing your exact rescue coordinates to 911 or emergency family contacts.</li>
-                                </ol>
+                                <ol><li>Do not leave the vehicle. Turn on your hazards.</li><li>Tap the massive red <strong>'SOS SHARE'</strong> button.</li><li>Send the automated SMS payload to 911.</li></ol>
                             </div>
                         </div>
                     </div>
-
                     <div class="scenario-card">
                         <img src="scenario-lost-tourist.jpg" alt="Lost Tourist in City" class="scenario-img">
                         <div class="scenario-body">
@@ -608,15 +422,10 @@
                             <p class="scenario-desc">Wandering a chaotic, bustling foreign city where the street signs are in a language you cannot read. Your travel group is separated.</p>
                             <div class="scenario-steps">
                                 <h4>Protocol:</h4>
-                                <ol>
-                                    <li>Tap <strong>'Share Link'</strong> and send it to your group chat via WhatsApp.</li>
-                                    <li>Once they reply with their link, paste it into <strong>'Meet Friend'</strong> mode.</li>
-                                    <li>The tool will calculate the exact geographic midpoint for you to reunite safely.</li>
-                                </ol>
+                                <ol><li>Tap <strong>'Share Link'</strong> and send it via WhatsApp.</li><li>Paste their link into <strong>'Meet Friend'</strong> mode.</li><li>The tool calculates the geographic midpoint to reunite.</li></ol>
                             </div>
                         </div>
                     </div>
-
                     <div class="scenario-card">
                         <img src="scenario-boat-storm.jpg" alt="Boat in Storm" class="scenario-img">
                         <div class="scenario-body">
@@ -624,15 +433,10 @@
                             <p class="scenario-desc">A sudden, violent storm hits while you are recreational fishing miles off the coast. Radioing the Coast Guard requires exact maritime positioning.</p>
                             <div class="scenario-steps">
                                 <h4>Protocol:</h4>
-                                <ol>
-                                    <li>Ensure your phone has a clear view of the sky (not under a heavy cabin roof).</li>
-                                    <li>Read the Latitude and Longitude to maritime dispatch over your <strong>VHF Radio (Channel 16)</strong>.</li>
-                                    <li>Activate the <strong>Strobe feature</strong> (found in guides) to flash visual SOS.</li>
-                                </ol>
+                                <ol><li>Ensure your phone has a clear view of the sky.</li><li>Read the Latitude and Longitude over your <strong>VHF Radio (Channel 16)</strong>.</li></ol>
                             </div>
                         </div>
                     </div>
-
                     <div class="scenario-card">
                         <img src="scenario-rescue-truck.jpg" alt="Search and Rescue Truck" class="scenario-img">
                         <div class="scenario-body">
@@ -640,15 +444,10 @@
                             <p class="scenario-desc">When 911 is dialed, dispatchers are often fighting against wildly inaccurate cell-tower triangulation data. They need hard numbers to send the trucks.</p>
                             <div class="scenario-steps">
                                 <h4>Protocol:</h4>
-                                <ol>
-                                    <li>State: <strong>"I have exact GPS coordinates. Ready to copy?"</strong></li>
-                                    <li>Read the coordinates slowly, using phonetic alphabet markers (e.g., "North" = November).</li>
-                                    <li>Keep the dashboard open to monitor your <strong>Accuracy Radius</strong> in real-time.</li>
-                                </ol>
+                                <ol><li>State: <strong>"I have exact GPS coordinates. Ready to copy?"</strong></li><li>Read the coordinates slowly, using phonetic alphabet markers.</li></ol>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
 
@@ -695,10 +494,8 @@
             <div class="content-section">
                 <h2>Why Use TellMyLocation?</h2>
                 <p>In an emergency, every second counts. Traditional map applications are often cluttered with search bars, restaurant reviews, and navigation menus. <strong>TellMyLocation.com</strong> is engineered for a single purpose: to give you your exact geolocation coordinates (Latitude and Longitude) and physical address in the fastest time possible.</p>
-                
                 <h3>1. The "Zero-Click" Interface</h3>
                 <p>Unlike other tools that require you to "drop a pin" or "search current location," our site automatically queries your device's GNSS (Global Navigation Satellite System) chip the moment you load the page. This reduces the time-to-result from an average of 12 seconds (on standard maps) to under 3 seconds.</p>
-
                 <h3>2. Privacy by Design (Client-Side)</h3>
                 <p>Most location apps send your data to a central server to be processed and stored. We utilize a <strong>Client-Side Architecture</strong>. This means the calculation of your position happens entirely within your phone's browser. Your coordinates are never stored in a database, ensuring your movement history remains private.</p>
             </div>
@@ -788,773 +585,6 @@
         </div>
     </div>
 </div>
-
-<script>
-    /* DEBOUNCE UTILITY (The "Brakes") */
-    let debounceTimer;
-    function debounce(func, timeout = 1000){
-        return (...args) => {
-            clearTimeout(debounceTimer);
-            debounceTimer = setTimeout(() => { func.apply(this, args); }, timeout);
-        };
-    }
-
-    function openDirectMap() {
-        if (!currentPos) return alert("Waiting for location...");
-        window.open(`https://www.google.com/maps?q=${currentPos.lat},${currentPos.lng}`, '_blank');
-    }
-
-    /* --- STREET VIEW LOGIC --- */
-    function launchStreetView() {
-        if (!currentPos || !currentPos.lat) {
-            return alert("Waiting for GPS lock. Please ensure location permissions are granted.");
-        }
-        // Official Google Maps Universal Deep Link for 360 Street View
-        const url = `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${currentPos.lat},${currentPos.lng}`;
-        window.open(url, '_blank', 'noopener,noreferrer');
-    }
-
-    // Generate QR Code
-    new QRCode(document.getElementById("qrcode"), {
-        text: window.location.href,
-        width: 100,
-        height: 100,
-        colorDark : "#000000",
-        colorLight : "#ffffff",
-        correctLevel : QRCode.CorrectLevel.H
-    });
-
-    // Real-time Compass Orientation logic
-    window.addEventListener('deviceorientation', function(event) {
-        if (event.webkitCompassHeading) {
-            document.getElementById('compass-svg').style.transform = `rotate(${-event.webkitCompassHeading}deg)`;
-            document.getElementById('head-p').textContent = Math.round(event.webkitCompassHeading) + '°';
-        } else if (event.alpha) {
-            document.getElementById('compass-svg').style.transform = `rotate(${-event.alpha}deg)`;
-            document.getElementById('head-p').textContent = Math.round(event.alpha) + '°';
-        }
-    }, true);
-
-    // Update Premium Dashboard Clock
-    setInterval(() => {
-        const now = new Date();
-        document.getElementById('time-p').textContent = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'});
-    }, 1000);
-
-    /* ORIGINAL SCRIPT CONTINUES BELOW */
-    const i18n = {
-        en: {
-            tagline: "Instant, Private, & Accurate",
-            address_title: "Current Address",
-            gps_label: "GPS Coordinates",
-            weather_label: "Weather",
-            ip_label: "Network IP",
-            nearby_label: "Nearest Emergency Services",
-            btn_sos: "SHARE LOCATION (SOS)",
-            btn_refresh: "Refresh",
-            btn_copy: "Copy Lat/Long",
-            btn_coffee: "Buy Me a Coffee",
-            trust_text: "🔒 Privacy Guarantee: We do not save, need, or share your location. This website exists solely to help you or save you when needed. All data is processed securely on your device.",
-            link_privacy: "Privacy Policy", link_terms: "Terms of Use", link_contact: "Contact Us",
-            cookie_text: "We use cookies to analyze traffic and show personalized ads to support this free tool.",
-            btn_accept: "Accept All"
-        },
-        es: {
-            tagline: "Instantáneo, Privado y Preciso",
-            address_title: "Dirección Actual",
-            gps_label: "Coordenadas GPS",
-            weather_label: "Clima",
-            ip_label: "IP de Red",
-            nearby_label: "Servicios de Emergencia",
-            btn_sos: "COMPARTIR UBICACIÓN (SOS)",
-            btn_refresh: "Actualizar",
-            btn_copy: "Copiar Lat/Long",
-            btn_coffee: "Invítame un Café",
-            trust_text: "🔒 Garantía de Privacidad: No guardamos, necesitamos ni compartimos tu ubicación. Este sitio existe solo para ayudarte o salvarte cuando sea necesario.",
-            link_privacy: "Privacidad", link_terms: "Términos", link_contact: "Contacto",
-            cookie_text: "Usamos cookies para analizar el tráfico y mostrar anuncios personalizados.",
-            btn_accept: "Aceptar"
-        },
-        fr: {
-            tagline: "Instantané, Privé et Précis",
-            address_title: "Adresse Actuelle",
-            gps_label: "Coordonnées GPS",
-            weather_label: "Météo",
-            ip_label: "IP Réseau",
-            nearby_label: "Services d'Urgence Proches",
-            btn_sos: "PARTAGER POSITION (SOS)",
-            btn_refresh: "Actualiser",
-            btn_copy: "Copiar Lat/Long",
-            btn_coffee: "Offrez-moi un café",
-            trust_text: "🔒 Garantie de Confidentialité : Nous n'enregistrons ni ne partageons votre localisation. Ce site existe uniquement pour vous aider ou vous sauver en cas de besoin.",
-            link_privacy: "Confidentialité", link_terms: "Conditions", link_contact: "Contact",
-            cookie_text: "Nous utilisons des cookies pour analyser le trafic et afficher des publicités.",
-            btn_accept: "Accepter"
-        },
-        ru: {
-            tagline: "Мгновенно, приватно и точно",
-            address_title: "Текущий адрес",
-            gps_label: "Координаты GPS",
-            weather_label: "Погода",
-            ip_label: "IP-адрес сети",
-            nearby_label: "Ближайшие экстренные службы",
-            btn_sos: "ПОДЕЛИТЬСЯ (SOS)",
-            btn_refresh: "Обновить",
-            btn_copy: "Копировать",
-            btn_coffee: "Купить мне кофе",
-            trust_text: "🔒 Гарантия конфиденциальности: Мы не сохраняем и не передаем ваше местоположение. Этот сайт создан только для того, чтобы помочь вам в экстренной ситуации.",
-            link_privacy: "Политика", link_terms: "Условия", link_contact: "Контакты",
-            cookie_text: "Мы используем файлы cookie для анализа трафика и показа рекламы.",
-            btn_accept: "Принять"
-        },
-        ar: {
-            tagline: "فوري، خاص، ودقيق",
-            address_title: "العنوان الحالي",
-            gps_label: "إحداثيات GPS",
-            weather_label: "الطقس",
-            ip_label: "عنوان IP",
-            nearby_label: "أقرب خدمات الطوارئ",
-            btn_sos: "مشاركة الموقع (SOS)",
-            btn_refresh: "تحديث البيانات",
-            btn_copy: "نسخ الإحداثيات",
-            btn_coffee: "دعم الموقع (قهوة)",
-            trust_text: "🔒 ضمان الخصوصية: نحن لا نحفظ موقعك أو نحتاج إليه أو نشاركه. هذا الموقع موجود فقط لمساعدتك أو إنقاذك عند الحاجة. تتم معالجة جميع البيانات بأمان على جهازك.",
-            link_privacy: "الخصوصية", link_terms: "الشروط", link_contact: "اتصل بنا",
-            cookie_text: "نحن نستخدم ملفات تعريف الارتباط لتحليل حركة المرور وعرض الإعلانات.",
-            btn_accept: "قبول"
-        }
-    };
-
-    function changeLanguage(lang) {
-        localStorage.setItem('user_lang', lang);
-        if (lang === 'ar') { document.body.classList.add('rtl'); } else { document.body.classList.remove('rtl'); }
-        const texts = i18n[lang];
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if (texts[key]) el.textContent = texts[key];
-        });
-    }
-
-    const savedLang = localStorage.getItem('user_lang') || 'en';
-    document.getElementById('language').value = savedLang;
-    changeLanguage(savedLang);
-
-    // --- CONSENT LOGIC START ---
-    function checkConsent() {
-        const consent = localStorage.getItem('cookiesAccepted');
-        if (!consent) {
-            document.getElementById('cookie-banner').style.display = 'block';
-        } else if (consent === 'granted') {
-            gtag('consent', 'update', {
-                'ad_storage': 'granted',
-                'ad_user_data': 'granted',
-                'ad_personalization': 'granted',
-                'analytics_storage': 'granted'
-            });
-        }
-        // If 'denied', we do nothing (default is denied)
-    }
-
-    function acceptCookies() {
-        localStorage.setItem('cookiesAccepted', 'granted');
-        document.getElementById('cookie-banner').style.display = 'none';
-        gtag('consent', 'update', {
-            'ad_storage': 'granted',
-            'ad_user_data': 'granted',
-            'ad_personalization': 'granted',
-            'analytics_storage': 'granted'
-        });
-    }
-
-    function rejectCookies() {
-        localStorage.setItem('cookiesAccepted', 'denied');
-        document.getElementById('cookie-banner').style.display = 'none';
-        // Explicitly set denied just in case
-        gtag('consent', 'update', {
-            'ad_storage': 'denied',
-            'ad_user_data': 'denied',
-            'ad_personalization': 'denied',
-            'analytics_storage': 'denied'
-        });
-    }
-
-    function showCookieBanner() {
-        document.getElementById('cookie-banner').style.display = 'block';
-    }
-
-    // Run check on load
-    checkConsent();
-    // --- CONSENT LOGIC END ---
-
-    const els = {
-        lat: document.getElementById("lat-val"),
-        lng: document.getElementById("lng-val"),
-        addr: document.getElementById("full-address"),
-        acc: document.getElementById("accuracy-val"),
-        temp: document.getElementById("temp-display"),
-        wind: document.getElementById("wind-display"),
-        ip: document.getElementById("ip-val"),
-        isp: document.getElementById("isp-val"),
-        nearby: document.getElementById("nearby-results")
-    };
-
-    let map, marker, accuracyCircle, currentPos = null;
-
-    function getDistance(lat1, lon1, lat2, lon2) {
-        const R = 6371; 
-        const dLat = (lat2 - lat1) * Math.PI / 180;
-        const dLon = (lon2 - lon1) * Math.PI / 180;
-        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        const km = R * c;
-        return { km: km.toFixed(2), mi: (km * 0.621371).toFixed(2) };
-    }
-
-    // RENAMED TO runDashboardUpdate for Debouncing
-    async function runDashboardUpdate(lat, lng, acc) {
-        currentPos = { lat, lng };
-        try {
-            const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`);
-            const data = await res.json();
-            els.addr.textContent = data.display_name || "Unknown Address";
-        } catch(e) { els.addr.textContent = "..."; }
-
-        try {
-            const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,wind_speed_10m`);
-            const data = await res.json();
-            const c = Math.round(data.current.temperature_2m);
-            const f = Math.round((c * 9/5) + 32);
-            const kph = Math.round(data.current.wind_speed_10m);
-            const mph = Math.round(kph * 0.621371);
-            els.temp.textContent = `${f}°F / ${c}°C`;
-            els.wind.textContent = `${mph} mph / ${kph} km/h`;
-        } catch(e) { els.temp.textContent = "N/A"; }
-
-        try {
-            // FIXED 504 TIMEOUT: Switched to faster mirror 'overpass.kumi.systems'
-            const query = `[out:json][timeout:10];(node["amenity"~"police|hospital|fuel"](around:5000,${lat},${lng}););out body 10;`;
-            const res = await fetch("https://overpass.kumi.systems/api/interpreter", { method: "POST", body: query });
-            const data = await res.json();
-            const types = { police: "Police", hospital: "Hospital", fuel: "Fuel" };
-            let best = { police: null, hospital: null, fuel: null };
-            data.elements.forEach(el => {
-                const t = el.tags.amenity;
-                const dist = getDistance(lat, lng, el.lat, el.lon);
-                if (!best[t] || parseFloat(dist.km) < parseFloat(best[t].dist.km)) {
-                    best[t] = { name: el.tags.name || "Local", dist };
-                }
-            });
-            els.nearby.innerHTML = "";
-            Object.keys(best).forEach(k => {
-                const item = best[k];
-                const div = document.createElement("div");
-                div.className = "nearby-item";
-                div.innerHTML = item ? 
-                    `<div class="nearby-type">${types[k]}</div><div class="nearby-name">${item.name}</div><div class="nearby-dist">${item.dist.mi} mi / ${item.dist.km} km</div>` :
-                    `<div class="nearby-type">${types[k]}</div><div class="nearby-name" style="color:#555">None</div>`;
-                els.nearby.appendChild(div);
-            });
-        } catch(e) { 
-            console.log("Nearby Error: ", e); 
-            els.nearby.innerHTML = '<div style="color:#ef4444; font-size:12px; padding:10px;">Service temporarily unavailable due to high traffic.</div>';
-        }
-    }
-
-    // WRAP UPDATE IN DEBOUNCE (1 second delay) for Heavy API Calls
-    const updateDashboard = debounce((lat, lng, acc) => {
-        runDashboardUpdate(lat, lng, acc);
-    }, 1000);
-
-    function initGPS() {
-        if (!navigator.geolocation) { els.addr.textContent = "GPS not supported"; return; }
-        navigator.geolocation.getCurrentPosition(pos => {
-            const { latitude, longitude, accuracy, altitude } = pos.coords;
-            
-            // 1. INSTANT UPDATE: Update Coordinates UI Immediately (No Delay)
-            els.lat.textContent = latitude.toFixed(5);
-            els.lng.textContent = longitude.toFixed(5);
-            els.acc.textContent = `±${Math.round(accuracy)}m`;
-            
-            // Update New Premium Dashboard Fields
-            document.getElementById('alt-p').textContent = altitude ? Math.round(altitude) + 'm' : 'Sea Level';
-
-            if (!map) {
-                map = L.map("map", { zoomControl: false }).setView([latitude, longitude], 15);
-                L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19 }).addTo(map);
-                marker = L.marker([latitude, longitude]).addTo(map);
-                accuracyCircle = L.circle([latitude, longitude], { radius: accuracy }).addTo(map);
-            } else {
-                map.setView([latitude, longitude], 15);
-                marker.setLatLng([latitude, longitude]);
-                accuracyCircle.setLatLng([latitude, longitude]);
-                accuracyCircle.setRadius(accuracy);
-            }
-            
-            // 2. INSTANT UPDATE: Run Address/Weather immediately on first load
-            // Bypassing the debounce wrapper to fix "Address not appearing" issue
-            runDashboardUpdate(latitude, longitude, accuracy);
-            
-        }, (err) => { els.addr.textContent = "Please enable Location Services."; }, { enableHighAccuracy: true });
-        fetch("https://ipapi.co/json/").then(r=>r.json()).then(d=>{
-            els.ip.textContent = d.ip;
-            els.isp.textContent = d.org;
-        });
-    }
-
-    document.getElementById("refresh-btn").addEventListener("click", () => location.reload());
-    document.getElementById("copy-coords-btn").addEventListener("click", () => {
-        navigator.clipboard.writeText(`${els.lat.textContent}, ${els.lng.textContent}`);
-        alert("Coordinates Copied!");
-    });
-    document.getElementById("copy-addr").addEventListener("click", () => {
-        navigator.clipboard.writeText(els.addr.textContent);
-        alert("Address Copied!");
-    });
-    // MODIFIED: Original listener maintained, but enhanced SOS logic added below
-    document.getElementById("sos-btn").addEventListener("click", () => {
-        // Trigger New SOS Mode instead of just sharing
-        triggerSOSMode();
-    });
-    initGPS();
-
-    /* =========================================
-       NEW DEVELOPER MODE MODULES & FUNCTIONS
-       ========================================= */
-
-    /* --- OFFLINE MODE HANDLER --- */
-    window.addEventListener('offline', () => {
-        document.getElementById('offline-indicator').style.display = 'inline-block';
-        // Try to load cached pins
-        loadPins();
-    });
-    window.addEventListener('online', () => {
-        document.getElementById('offline-indicator').style.display = 'none';
-    });
-
-    /* --- UI TOGGLER --- */
-    function toggleModule(id) {
-        document.querySelectorAll('.new-module-container').forEach(el => {
-            if (el.id !== id) el.classList.remove('active-mod');
-        });
-        const mod = document.getElementById(id);
-        mod.classList.toggle('active-mod');
-        
-        // Populate share link if opening share mod
-        if (id === 'share-mod' && currentPos) {
-            document.getElementById('share-url-input').value = `https://tellmylocation.com/?lat=${currentPos.lat}&lng=${currentPos.lng}`;
-        }
-    }
-
-    /* --- MODULE: SHAREABLE LINK --- */
-    function copyShareLink() {
-        const input = document.getElementById('share-url-input');
-        input.select();
-        document.execCommand('copy');
-        alert('Link copied to clipboard!');
-    }
-    
-    function shareSocial(platform) {
-        if (!currentPos) return alert("Waiting for location...");
-        const url = `https://tellmylocation.com/?lat=${currentPos.lat}&lng=${currentPos.lng}`;
-        const msg = `My current location: ${url}`;
-        let link = "";
-        
-        if (platform === 'wa') link = `https://wa.me/?text=${encodeURIComponent(msg)}`;
-        if (platform === 'sms') link = `sms:?body=${encodeURIComponent(msg)}`;
-        if (platform === 'tg') link = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent("My Location")}`;
-        
-        window.open(link, '_blank');
-    }
-
-    function startLiveTrack() {
-        // STUB: This would connect to a backend websocket
-        const btn = document.getElementById('live-trk-btn');
-        btn.innerText = "📡 Tracking Active (15m)";
-        btn.style.background = "#ef4444";
-        setTimeout(() => {
-            btn.innerText = "📡 Start Live (15m)";
-            btn.style.background = "";
-            alert("Live tracking session ended.");
-        }, 15 * 60 * 1000); // 15 mins
-        alert("Live tracking started. Session ID: " + Math.random().toString(36).substr(2, 9));
-    }
-
-    /* --- MODULE: DRIVER MODE --- */
-    let watchId = null;
-    function enableDriverStats() {
-        if (watchId) return;
-        watchId = navigator.geolocation.watchPosition(pos => {
-            const spd = pos.coords.speed; // m/s
-            const hdg = pos.coords.heading;
-            
-            if (spd !== null) {
-                const mph = Math.round(spd * 2.23694);
-                document.getElementById('drv-speed').innerText = mph;
-            }
-            if (hdg !== null && !isNaN(hdg)) {
-                const dirs = ['N','NE','E','SE','S','SW','W','NW'];
-                const ix = Math.round(((hdg %= 360) < 0 ? hdg + 360 : hdg) / 45) % 8;
-                document.getElementById('drv-dir').innerText = dirs[ix];
-            }
-        }, null, {enableHighAccuracy: true});
-    }
-    // Activate driver stats when module opens (conceptually)
-    document.querySelector('button[onclick="toggleModule(\'driver-mod\')"]').addEventListener('click', enableDriverStats);
-
-    function openMapSearch(query) {
-        if (!currentPos) return;
-        window.open(`https://www.google.com/maps/search/${query}/@${currentPos.lat},${currentPos.lng},15z`, '_blank');
-    }
-
-    function shareETA() {
-        const min = prompt("Minutes to arrival?", "15");
-        if (!min) return;
-        const msg = `I will arrive in approx ${min} mins. Track me: https://tellmylocation.com/?lat=${currentPos.lat}&lng=${currentPos.lng}`;
-        window.location.href = `sms:?body=${encodeURIComponent(msg)}`;
-    }
-    
-    function shareLocationSimple() {
-        shareSocial('sms');
-    }
-
-    /* --- MODULE: HIKER MODE --- */
-    function dropPin() {
-        if (!currentPos) return alert("No GPS signal.");
-        const pins = JSON.parse(localStorage.getItem('hiker_pins') || "[]");
-        const pin = {
-            time: new Date().toLocaleTimeString(),
-            lat: currentPos.lat,
-            lng: currentPos.lng
-        };
-        pins.push(pin);
-        localStorage.setItem('hiker_pins', JSON.stringify(pins));
-        loadPins();
-    }
-
-    function loadPins() {
-        const list = document.getElementById('pin-list');
-        list.innerHTML = "";
-        const pins = JSON.parse(localStorage.getItem('hiker_pins') || "[]");
-        pins.forEach((p, i) => {
-            const div = document.createElement('div');
-            div.className = 'pin-item';
-            div.innerHTML = `<span>📍 Pin ${i+1} (${p.time})</span> <a href="https://www.google.com/maps?q=${p.lat},${p.lng}" target="_blank" style="color:#38bdf8">Map</a>`;
-            list.appendChild(div);
-        });
-    }
-    
-    function clearPins() {
-        if(confirm("Delete all pins?")) {
-            localStorage.removeItem('hiker_pins');
-            loadPins();
-        }
-    }
-    loadPins(); // Init load
-
-    /* --- MODULE: MEET FRIEND --- */
-    function calcFriendDist() {
-        const val = document.getElementById('friend-input').value;
-        // Simple parser for "lat,lng"
-        let lat2, lng2;
-        
-        // Regex to find coords in a string
-        const match = val.match(/([-+]?\d{1,2}\.\d+),\s*([-+]?\d{1,3}\.\d+)/);
-        if (match) {
-            lat2 = parseFloat(match[1]);
-            lng2 = parseFloat(match[2]);
-        } else if (val.includes('lat=') && val.includes('lng=')) {
-            const url = new URL(val);
-            lat2 = parseFloat(url.searchParams.get('lat'));
-            lng2 = parseFloat(url.searchParams.get('lng'));
-        } else {
-            return alert("Could not parse coordinates. Please use 'lat,lng' format.");
-        }
-
-        if (!currentPos) return alert("Your location is not set yet.");
-        
-        const dist = getDistance(currentPos.lat, currentPos.lng, lat2, lng2);
-        
-        // Calc Midpoint
-        const midLat = (currentPos.lat + lat2) / 2;
-        const midLng = (currentPos.lng + lng2) / 2;
-        
-        const res = document.getElementById('friend-res');
-        res.innerHTML = `
-            <strong>Distance:</strong> ${dist.mi} mi / ${dist.km} km<br>
-            <strong>Midpoint:</strong> <a href="https://www.google.com/maps?q=${midLat},${midLng}" target="_blank" style="color:#38bdf8; text-decoration:underline;">Find Meetup Spot</a>
-        `;
-    }
-
-    /* --- MODULE: SOS MODE --- */
-    let sosAudio = null;
-    function triggerSOSMode() {
-        const overlay = document.getElementById('sos-overlay');
-        overlay.style.display = 'flex';
-        
-        // Auto share (Standardized)
-        if (navigator.share && currentPos) {
-            navigator.share({
-                title: 'EMERGENCY LOCATION',
-                text: 'Emergency Location:',
-                url: `https://tellmylocation.com/?lat=${currentPos.lat}&lng=${currentPos.lng}`
-            }).catch(console.log);
-        }
-    }
-
-    function stopSOS() {
-        document.getElementById('sos-overlay').style.display = 'none';
-        if (sosAudio) {
-            sosAudio.pause();
-            sosAudio = null;
-        }
-    }
-
-    /* --- PREMIUM SOCIAL SHARE LOGIC --- */
-    function triggerPremiumShare(platform) {
-        // Base promo text if no GPS lock
-        let url = 'https://tellmylocation.com';
-        let text = 'Never get lost again. I use TellMyLocation for instant, private offline GPS tracking and emergency safety. 🌍📍';
-        let title = 'Tell My Location | Global GPS';
-
-        // Dynamic coordinate broadcast if GPS is locked
-        if (currentPos && currentPos.lat) {
-            url = `https://tellmylocation.com/?lat=${currentPos.lat}&lng=${currentPos.lng}`;
-            text = `📍 I am currently at these exact coordinates: ${currentPos.lat.toFixed(5)}, ${currentPos.lng.toFixed(5)}. Track my location here:`;
-        }
-
-        let shareLink = '';
-        const encodedUrl = encodeURIComponent(url);
-        const encodedText = encodeURIComponent(text);
-        const encodedTitle = encodeURIComponent(title);
-
-        switch(platform) {
-            case 'x':
-                shareLink = `https://x.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`;
-                break;
-            case 'fb':
-                shareLink = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
-                break;
-            case 'reddit':
-                shareLink = `https://www.reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}`;
-                break;
-            case 'wa':
-                shareLink = `https://wa.me/?text=${encodedText} ${encodedUrl}`;
-                break;
-            case 'sms':
-                shareLink = `sms:?body=${encodedText} ${encodedUrl}`;
-                break;
-            case 'email':
-                shareLink = `mailto:?subject=${encodedTitle}&body=${encodedText} ${encodedUrl}`;
-                break;
-            case 'ig':
-                // IG workaround: No direct web share link for IG posts/stories, so we copy it to clipboard.
-                navigator.clipboard.writeText(`${text} ${url}`);
-                alert("Link and message copied to your clipboard! 📸 Open Instagram and paste it into your Story or DM.");
-                return; 
-        }
-        
-        if (shareLink) {
-            window.open(shareLink, '_blank', 'noopener,noreferrer');
-        }
-    }
-
-    /* --- CHECK URL PARAMS ON LOAD --- */
-    window.onload = function() {
-        const params = new URLSearchParams(window.location.search);
-        const pLat = params.get('lat');
-        const pLng = params.get('lng');
-        if (pLat && pLng) {
-            // If someone shared a link, maybe show it differently or map it
-            // For now we just focus the map there if logic allows, or alert
-            console.log("Opened via shared link:", pLat, pLng);
-            setTimeout(() => {
-               if(map) {
-                   L.marker([pLat, pLng], {color:'red'}).addTo(map).bindPopup("Shared Location").openPopup();
-                   map.setView([pLat, pLng], 15);
-               }
-            }, 2000);
-        }
-    };
-</script>
-
-<script>
-    // New Feature Module: Weather & Alerts
-    (function() {
-        // Init mini map var
-        let miniMap = null;
-
-        const weatherCodes = {
-            0: "☀️ Clear", 1: "🌤️ Mostly Clear", 2: "⛅ Partly Cloudy", 3: "☁️ Overcast",
-            45: "🌫️ Fog", 48: "🌫️ Rime Fog",
-            51: "DRIZZLE", 53: "DRIZZLE", 55: "DRIZZLE",
-            61: "Rain", 63: "Rain", 65: "Heavy Rain",
-            71: "Snow", 73: "Snow", 75: "Heavy Snow",
-            80: "Showers", 81: "Showers", 82: "Showers",
-            95: "STORM", 96: "STORM", 99: "HEAVY STORM"
-        };
-
-        function getDesc(code) { return weatherCodes[code] || "Unknown"; }
-
-        function initPreviewMap(lat, lng) {
-            if(!miniMap) {
-                // Initialize the preview map
-                miniMap = L.map('mini-map', { zoomControl: false, attributionControl: false }).setView([lat, lng], 13);
-                L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-                    maxZoom: 19
-                }).addTo(miniMap);
-                L.marker([lat, lng]).addTo(miniMap);
-                
-                // Expose to window for buttons
-                window.mapPreview = miniMap;
-                window.lastLat = lat;
-                window.lastLng = lng;
-            } else {
-                miniMap.setView([lat, lng], 13);
-                window.lastLat = lat;
-                window.lastLng = lng;
-                // In a real app we'd update the marker position too, but for a preview snippet, re-centering is key.
-            }
-        }
-
-        // DEBOUNCE REMOVED for this function to ensure initial load works immediately
-        function fetchExtendedWeather(lat, lng) {
-            const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,uv_index&hourly=temperature_2m,weather_code,precipitation_probability&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=auto&forecast_days=1`;
-            
-            fetch(url).then(r=>r.json()).then(data => {
-                document.getElementById('weather-loading').style.display = 'none';
-                document.getElementById('weather-content').style.display = 'block';
-
-                // Current
-                document.getElementById('wx-temp').innerText = Math.round(data.current.temperature_2m) + "°F";
-                document.getElementById('wx-desc').innerText = getDesc(data.current.weather_code);
-                document.getElementById('wx-wind').innerText = Math.round(data.current.wind_speed_10m) + " mph";
-                document.getElementById('wx-hum').innerText = data.current.relative_humidity_2m + "%";
-                document.getElementById('wx-uv').innerText = data.current.uv_index;
-
-                // Alerts Logic (Simulated based on severity of current data, as Open-Meteo alerts endpoint requires different handling/parsing)
-                const panel = document.getElementById('wx-alert-panel');
-                const msg = document.getElementById('wx-alert-msg');
-                // Simple logic: if code is storm, or wind > 40mph, or UV > 8
-                if(data.current.weather_code >= 95 || data.current.wind_speed_10m > 40 || data.current.uv_index > 8) {
-                    panel.style.borderColor = "#ef4444";
-                    panel.style.background = "rgba(239, 68, 68, 0.1)";
-                    msg.innerText = "⚠️ CAUTION: High winds, storm, or UV detected.";
-                    msg.style.color = "#fca5a5";
-                } else {
-                    panel.style.borderColor = "#10b981";
-                    panel.style.background = "rgba(16, 185, 129, 0.05)";
-                    msg.innerText = "Clear — No severe warnings active.";
-                    msg.style.color = "#cbd5e1";
-                }
-
-                // Hourly Forecast (Next 12h)
-                const hourlyDiv = document.getElementById('wx-hourly');
-                hourlyDiv.innerHTML = "";
-                const nowHour = new Date().getHours();
-                
-                let startIndex = nowHour;
-                
-                for(let i=0; i<12; i++) { 
-                    let idx = startIndex + i;
-                    if(idx >= data.hourly.time.length) break;
-                    
-                    const t = Math.round(data.hourly.temperature_2m[idx]);
-                    const code = data.hourly.weather_code[idx];
-                    const pop = data.hourly.precipitation_probability[idx];
-                    
-                    const el = document.createElement('div');
-                    el.style = "background:rgba(255,255,255,0.05); padding:10px; border-radius:8px; min-width:60px; text-align:center; flex-shrink:0;";
-                    el.innerHTML = `
-                        <div style="font-size:10px; color:#94a3b8; margin-bottom:4px;">+${i}h</div>
-                        <div style="font-size:16px; margin-bottom:2px;">${(code > 50) ? '🌧️' : ((code < 3) ? '☀️' : '☁️')}</div>
-                        <div style="font-size:13px; font-weight:700;">${t}°</div>
-                        <div style="font-size:9px; color:#38bdf8;">${pop}%</div>
-                    `;
-                    hourlyDiv.appendChild(el);
-                }
-
-            }).catch(e => {
-                document.getElementById('weather-loading').innerText = "Weather unavailable.";
-            });
-        }
-
-        // Initialize listener
-        // We poll for DOM changes because variable scope between script tags can be tricky with 'let'
-        const checkLoc = setInterval(() => {
-            const latTxt = document.getElementById('lat-val').textContent;
-            const lngTxt = document.getElementById('lng-val').textContent;
-            
-            if(latTxt !== '—' && !isNaN(parseFloat(latTxt))) {
-                const lat = parseFloat(latTxt);
-                const lng = parseFloat(lngTxt);
-                
-                initPreviewMap(lat, lng);
-                fetchExtendedWeather(lat, lng);
-                clearInterval(checkLoc);
-            }
-        }, 1000);
-    })();
-</script>
-
-<script>
-    const globalSOS = {
-        "US": { n: "911", c: "United States" },
-        "CA": { n: "911", c: "Canada" },
-        "MX": { n: "911", c: "Mexico" },
-        "GB": { n: "999", c: "United Kingdom" },
-        "IE": { n: "112", c: "Ireland" },
-        "AU": { n: "000", c: "Australia" },
-        "NZ": { n: "111", c: "New Zealand" },
-        "ZA": { n: "10111", c: "South Africa" },
-        "IN": { n: "112", c: "India" },
-        "JP": { n: "110", c: "Japan (Police) / 119 (Fire)" },
-        "CN": { n: "110", c: "China (Police) / 120 (Amb)" },
-        "BR": { n: "190", c: "Brazil (Police) / 192 (Amb)" },
-        "AE": { n: "999", c: "UAE" },
-        "SA": { n: "999", c: "Saudi Arabia" },
-        "JO": { n: "911", c: "Jordan" },
-        "IL": { n: "100", c: "Israel" },
-        "EG": { n: "122", c: "Egypt" },
-        // EU Standard
-        "FR": { n: "112", c: "France" },
-        "DE": { n: "112", c: "Germany" },
-        "IT": { n: "112", c: "Italy" },
-        "ES": { n: "112", c: "Spain" },
-        "NL": { n: "112", c: "Netherlands" },
-        "SE": { n: "112", c: "Sweden" },
-        "NO": { n: "112", c: "Norway" },
-        "DK": { n: "112", c: "Denmark" },
-        "FI": { n: "112", c: "Finland" },
-        "CH": { n: "112", c: "Switzerland" },
-        "PT": { n: "112", c: "Portugal" },
-        "GR": { n: "112", c: "Greece" },
-        "PL": { n: "112", c: "Poland" },
-        "BE": { n: "112", c: "Belgium" },
-        "AT": { n: "112", c: "Austria" },
-        "CZ": { n: "112", c: "Czech Republic" }
-    };
-
-    function updateSOSDirectory(countryCode, countryName) {
-        const cCode = countryCode.toUpperCase();
-        // Fallback to 112 (GSM Standard) if not explicitly mapped
-        let sosData = globalSOS[cCode] || { n: "112", c: countryName || "Unknown Region" };
-        
-        document.getElementById('sos-country-name').innerText = `Jurisdiction: ${sosData.c}`;
-        document.getElementById('sos-dial-number').innerText = sosData.n;
-        
-        const primaryNumber = sosData.n.split(" ")[0]; 
-        const dialBtn = document.getElementById('sos-dial-btn');
-        dialBtn.style.display = 'inline-block';
-        dialBtn.href = `tel:${primaryNumber}`;
-    }
-
-    // Uses the highly reliable IP-API to fetch the user's country code on page load
-    fetch("https://ipapi.co/json/").then(r=>r.json()).then(d=>{
-        if(d.country) {
-            updateSOSDirectory(d.country, d.country_name);
-        }
-    }).catch(e => console.log("SOS Directory: Could not fetch local jurisdiction data."));
-</script>
 
 <script>
   if ('serviceWorker' in navigator) {
