@@ -1,18 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script>
-        // 1. Enforce HTTPS (Skip if localhost)
-        if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
-            location.replace(`https:${location.href.substring(location.protocol.length)}`);
-        }
-        // 2. Remove .html extension from URL bar
-        if (window.location.pathname.endsWith('.html')) {
-            var cleanPath = window.location.pathname.replace('.html', '');
-            window.history.replaceState(null, '', cleanPath);
-        }
-    </script>
-
     <meta charset="UTF-8" />
     <title>Cookie Policy & Consent Management | Tell My Location</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
