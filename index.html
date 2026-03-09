@@ -2,25 +2,6 @@
 <html lang="en">
 <head>
     <script>
-        // ROBUST URL NORMALIZER
-        // 1. Enforce HTTPS
-        if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
-            location.replace(`https:${location.href.substring(location.protocol.length)}`);
-        }
-        // 2. Remove .html extension (Visual "301" via History API)
-        if (location.pathname.endsWith('.html')) {
-            var cleanPath = location.pathname.replace(/\.html$/, '');
-            // Special case: /index becomes /
-            if (cleanPath === '/index') cleanPath = '/';
-            window.history.replaceState(null, '', cleanPath);
-        }
-        // 3. Enforce Trailing Slash consistency
-        if (location.pathname.endsWith('/') && location.pathname !== '/') {
-            window.history.replaceState(null, '', location.pathname.slice(0, -1));
-        }
-    </script>
-
-    <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         
