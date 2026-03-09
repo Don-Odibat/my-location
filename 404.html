@@ -1,43 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script>
-        // 1. Enforce HTTPS (Skip if localhost)
-        if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
-            location.replace(`https:${location.href.substring(location.protocol.length)}`);
-        }
-        // 2. Remove .html extension from URL bar
-        if (window.location.pathname.endsWith('.html')) {
-            var cleanPath = window.location.pathname.replace('.html', '');
-            window.history.replaceState(null, '', cleanPath);
-        }
-    </script>
-    <meta charset="UTF-8" />
-    <title>Page Not Found | Tell My Location</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <meta name="description" content="Page not found. Return to TellMyLocation.com to find your current GPS coordinates.">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://tellmylocation.com/404" />
-    
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signal Lost - 404 | TellMyLocation</title>
     <style>
-        :root { --bg: #0f172a; --card: rgba(30, 41, 59, 0.8); --accent: #38bdf8; --text: #ffffff; --text-soft: #94a3b8; }
-        body { font-family: sans-serif; background: var(--bg); color: var(--text); padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; text-align: center; }
-        .shell { max-width: 600px; }
-        h1 { font-size: 80px; margin: 0; color: var(--accent); line-height: 1; }
-        h2 { font-size: 24px; margin-top: 10px; margin-bottom: 20px; }
-        p { color: var(--text-soft); margin-bottom: 40px; }
-        .btn { display: inline-block; background: var(--accent); color: #0f172a; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: 800; transition: transform 0.2s; }
-        .btn:hover { transform: scale(1.05); background: white; }
+        body { background: #0f172a; color: white; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; text-align: center; flex-direction: column; }
+        h1 { color: #ef4444; font-size: 50px; margin-bottom: 10px; }
+        p { color: #94a3b8; margin-bottom: 30px; }
+        a { background: #38bdf8; color: #0f172a; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; transition: 0.3s; }
+        a:hover { background: white; }
     </style>
 </head>
 <body>
-    <div class="shell">
-        <h1>404</h1>
-        <h2>Coordinates Not Found</h2>
-        <p>You seem to have drifted off the map. The page you are looking for does not exist.</p>
-        <a href="/" class="btn">Return to Home Base</a>
-    </div>
+    <h1>404: GPS Signal Lost</h1>
+    <p>We couldn't find the page you are looking for.</p>
+    <a href="/">Recalculate Route (Home)</a>
 </body>
 </html>
